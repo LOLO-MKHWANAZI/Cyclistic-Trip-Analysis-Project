@@ -69,12 +69,166 @@ In this phase, we explain the tools chosen for analysis and data cleaning, descr
 ### Documentation:
 The entire data cleaning process, including steps taken and transformations applied, was documented within the R script for review and sharing purposes.
 
+```R
+# Install and load necessary packages
+install.packages("tidyverse")
+library(tidyverse)
+
+# Importing data from Divvy 2019 Q1 and Divvy 2020 Q1
+divvy_2019_Q1 <- read.csv("Divvy_Trips_2019_Q1.csv")
+divvy_2020_Q1 <- read.csv("Divvy_Trips_2020_Q1.csv")
+
+# Check column names of divvy_2019_Q1 and divvy_2020_Q1
+print(colnames(divvy_2019_Q1))
+print(colnames(divvy_2020_Q1))
+
+# Rename columns of divvy_2020_Q1 to match the column names of divvy_2019_Q1
+colnames(divvy_2020_Q1) <- c("trip_id", "start_time", "end_time", "bikeid", "tripduration",
+                             "from_station_id", "from_station_name", "to_station_id", "to_station_name",
+                             "usertype", "gender", "birthyear")
+
+# Remove the "member_casual" column from divvy_2020_Q1
+divvy_2020_Q1 <- divvy_2020_Q1[, -which(names(divvy_2020_Q1) == "member_casual")]
+
+# Check if both data frames have the same number of columns now
+print(ncol(divvy_2019_Q1))
+print(ncol(divvy_2020_Q1))
+
+# Making columns consistent and merging them into a single data frame
+divvy_data <- rbind(divvy_2019_Q1, divvy_2020_Q1)
+
+# Cleaning up and preparing data for analysis
+# Specific cleaning steps:
+
+# Handle missing values, if any
+divvy_data <- na.omit(divvy_data)
+
+# Remove duplicates, if any
+divvy_data <- unique(divvy_data)
+
+# Convert data types if needed (e.g., converting character columns to factors, datetime conversion)
+divvy_data$start_time <- as.POSIXct(divvy_data$start_time, format = "%Y-%m-%d %H:%M:%S")
+divvy_data$end_time <- as.POSIXct(divvy_data$end_time, format = "%Y-%m-%d %H:%M:%S")
+
+# Convert tripduration to numeric
+divvy_data$tripduration <- as.numeric(divvy_data$tripduration)
+
+# Check for any non-numeric values in tripduration
+non_numeric_tripduration <- divvy_data[!grepl("^\\d+\\.?\\d*$", divvy_data$tripduration), "tripduration"]
+print(non_numeric_tripduration)
+
+# Remove non-numeric values from tripduration (if any)
+divvy_data <- divvy_data[grepl("^\\d+\\.?\\d*$", divvy_data$tripduration), ]
+
+# Now, perform the visualization
+# Visualization 1: Comparing Trip Duration
+ggplot(data = divvy_data, aes(x = usertype, y = tripduration/60)) +
+  geom_boxplot(fill = "skyblue") +
+  labs(title = "Comparison of Trip Duration",
+       x = "User Type",
+       y = "Trip Duration (minutes)") +
+  theme_minimal()
+
+# Visualization 2: Trip Count by User Type
+trip_count <- divvy_data %>% group_by(usertype) %>% summarize(count = n())
+ggplot(data = trip_count, aes(x = usertype, y = count, fill = usertype)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Trip Count by User Type",
+       x = "User Type",
+       y = "Trip Count") +
+  theme_minimal()
+
+# Visualization 3: Gender Distribution among Users
+gender_count <- divvy_data %>% filter(!is.na(gender)) %>% group_by(usertype, gender) %>% summarize(count = n())
+ggplot(data = gender_count, aes(x = usertype, y = count, fill = gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Gender Distribution among Users",
+       x = "User Type",
+       y = "Count",
+       fill = "Gender") +
+  theme_minimal()
+
+# Visualization 4: Age Distribution among Users
+current_year <- as.numeric(format(Sys.Date(), "%Y"))
+divvy_data$age <- current_year - divvy_data$birthyear
+age_data <- divvy_data %>% filter(!is.na(age))
+ggplot(data = age_data, aes(x = usertype, y = age, fill = usertype)) +
+  geom_boxplot() +
+  labs(title = "Age Distribution among Users",
+       x = "User Type",
+       y = "Age") +
+  theme_minimal()
+
+# Example: Plotting a histogram of trip durations
+ggplot(data = divvy_data, aes(x = tripduration)) +
+  geom_histogram(binwidth = 100, fill = "skyblue", color = "black", stat = "count") +
+  labs(title = "Distribution of Trip Durations",
+       x = "Trip Duration (seconds)",
+       y = "Frequency") +
+  theme_minimal()
+
+# Specify the relative file path for exporting summary statistics
+file_path <- "summary_file.csv"
+
+# Exporting a summary file for further analysis
+write.csv(summary(divvy_data), file_path)
+
+# Save cleaned data
+write.csv(divvy_data, "cleaned_divvy_data.csv", row.names = FALSE)
+
+```
+- This script first loads necessary libraries and imports the Divvy trip data from 2019 Q1 and 2020 Q1. Then, it cleans the data by renaming columns, removing unnecessary columns, handling missing values, removing duplicates, converting data types, and visualizing various aspects of the data using ggplot2. Finally, it exports summary statistics and the cleaned data to CSV files.
 
 ### Deliverable:
 A clean and well-prepared data set, along with documentation of the cleaning process, ensures that subsequent analysis and visualization tasks are based on reliable and consistent data. Additionally, the use of RStudio facilitates seamless integration of analysis code with documentation and visualization outputs.
 
 
+To ***analyze*** the data effectively, the following steps were taken:
 
+#### Data Import: Historical trip data from Divvy 2019 Q1 and Divvy 2020 Q1 was imported into R using the read.csv() function.
+
+#### Making Columns Consistent and Merging: Column names of Divvy 2020 Q1 were renamed to match those of Divvy 2019 Q1 for consistency. Then, the two data frames were merged into a single data frame named divvy_data using the rbind() function.
+
+#### Cleaning and Preparing Data: Any necessary data cleaning steps, such as handling missing values or removing duplicates, were performed to ensure data integrity. No specific cleaning steps were shown in the provided example.
+
+#### Descriptive Analysis: Descriptive analysis was conducted using the summary() function to understand the data distribution and summary statistics.
+
+#### Exporting Summary File: Summary statistics were exported to a CSV file for further analysis using the write.csv() function.
+
+- Additionally, calculations can be performed based on specific business questions or analysis objectives. For example, calculations related to average trip duration, frequency of bike usage by user type, or seasonal variations in bike rentals can provide valuable insights into user behavior and preferences.
+
+- Regarding trends or relationships identified in the data, these could include patterns in bike usage based on user type, popular biking routes or stations, peak usage hours, or differences in usage between different months or seasons.
+
+- These insights can help answer the guiding questions provided in the case study, such as understanding how annual members and casual riders use Cyclistic bikes differently and identifying factors that may influence casual riders to become annual members.
+
+
+### Creation of Visualizations to Communicate Findings Effectively:
+
+Visualizations play a crucial role in conveying insights effectively to the executive team. By presenting the key findings through sophisticated and polished visualizations, we can ensure that the information is easily understandable and actionable.
+
+### Process of Creating Visualizations Using Various Tools:
+
+#### **1. Selection of Visualization Tools:** We'll use R programming language with ggplot2 package for creating visualizations due to its versatility and ability to generate high-quality plots.
+
+#### 2. Data Preparation: Before creating visualizations, we'll organize the data and prepare it for visualization by aggregating, summarizing, and formatting it appropriately.
+
+#### 3. Choosing Visual Forms: Based on the key findings, we'll select appropriate visual forms such as bar charts, histograms, and pie charts to represent trip duration, trip count, gender distribution, and age distribution.
+
+#### 4. Creating Visualizations: Using ggplot2 in R, we'll create visually appealing and informative plots that effectively communicate the key findings. Each visualization will be carefully designed to highlight the relevant insights.
+
+### Supporting Visualizations and Key Findings Derived from the Analysis:
+
+#### 1. Trip Duration Comparison: We'll create a box plot or a violin plot to compare the distribution of trip durations between annual members and casual riders. This visualization will clearly illustrate any differences in usage patterns.
+
+#### 2. Trip Count Disparity: A bar chart or a pie chart can be used to visualize the proportion of trips contributed by annual members and casual riders. This will highlight the disparity in engagement with the service between the two user groups.
+
+#### 3. Gender Distribution: A pie chart or a bar chart can show the gender distribution among Cyclistic users, with separate segments or bars representing male and female users. This will visually depict the gender disparity observed in the data.
+
+#### 4. Age Distribution: A histogram or a density plot can represent the age distribution of Cyclistic users, with separate distributions for annual members and casual riders. This visualization will reveal any differences in the age demographics of the two user groups.
+
+- By presenting these visualizations along with the key findings, we can effectively communicate insights to the executive team, facilitating informed decision-making and strategy development for Cyclistic.
+
+![Alternate Text][]
 
 
 
