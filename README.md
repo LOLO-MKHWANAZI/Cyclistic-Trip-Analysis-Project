@@ -232,7 +232,7 @@ Visualizations play a crucial role in conveying insights effectively to the exec
 
 ![eea9e4d1-4da4-498d-9754-dae238dfb7d8](https://github.com/LOLO-MKHWANAZI/Cyclistic-Trip-Analysis-Project/assets/163551783/a4a751b0-3b29-4c26-9d65-a274b6d2766f)
 
-
+![cc109b72-1490-4767-a3c7-2795399395fb](https://github.com/LOLO-MKHWANAZI/Cyclistic-Trip-Analysis-Project/assets/163551783/7d04cf6e-716b-4bde-b2fe-c4c93ea683a6)
 
 
 
