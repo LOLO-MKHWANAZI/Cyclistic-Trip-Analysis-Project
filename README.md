@@ -183,7 +183,7 @@ write.csv(divvy_data, "cleaned_divvy_data.csv", row.names = FALSE)
 A clean and well-prepared data set, along with documentation of the cleaning process, ensures that subsequent analysis and visualization tasks are based on reliable and consistent data. Additionally, the use of RStudio facilitates seamless integration of analysis code with documentation and visualization outputs.
 
 
-To ***analyze*** the data effectively, the following steps were taken:
+## To ***analyze*** the data effectively, the following steps were taken:
 
 #### Data Import: Historical trip data from Divvy 2019 Q1 and Divvy 2020 Q1 was imported into R using the read.csv() function.
 
@@ -201,6 +201,7 @@ To ***analyze*** the data effectively, the following steps were taken:
 
 - These insights can help answer the guiding questions provided in the case study, such as understanding how annual members and casual riders use Cyclistic bikes differently and identifying factors that may influence casual riders to become annual members.
 
+## "Share" phase based on the key findings derived from the analysis of Cyclistic's historical trip data:
 
 ### Creation of Visualizations to Communicate Findings Effectively:
 
@@ -228,7 +229,7 @@ Visualizations play a crucial role in conveying insights effectively to the exec
 
 - By presenting these visualizations along with the key findings, we can effectively communicate insights to the executive team, facilitating informed decision-making and strategy development for Cyclistic.
 
-![Alternate Text][]
+
 
 
 
