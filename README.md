@@ -227,6 +227,11 @@ Visualizations play a crucial role in conveying insights effectively to the exec
 
 #### 4. Age Distribution: A histogram or a density plot can represent the age distribution of Cyclistic users, with separate distributions for annual members and casual riders. This visualization will reveal any differences in the age demographics of the two user groups.
 
+
+![d5711383-a881-49a7-a842-d2f613d7d065](https://github.com/LOLO-MKHWANAZI/Cyclistic-Trip-Analysis-Project/assets/163551783/96c53af0-544d-40c1-8357-5c1d5951762f)
+
+
+
 - By presenting these visualizations along with the key findings, we can effectively communicate insights to the executive team, facilitating informed decision-making and strategy development for Cyclistic.
 
 
