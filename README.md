@@ -230,6 +230,15 @@ Visualizations play a crucial role in conveying insights effectively to the exec
 
 ![d5711383-a881-49a7-a842-d2f613d7d065](https://github.com/LOLO-MKHWANAZI/Cyclistic-Trip-Analysis-Project/assets/163551783/96c53af0-544d-40c1-8357-5c1d5951762f)
 
+![eea9e4d1-4da4-498d-9754-dae238dfb7d8](https://github.com/LOLO-MKHWANAZI/Cyclistic-Trip-Analysis-Project/assets/163551783/a4a751b0-3b29-4c26-9d65-a274b6d2766f)
+
+
+
+
+
+
+
+
 
 
 - By presenting these visualizations along with the key findings, we can effectively communicate insights to the executive team, facilitating informed decision-making and strategy development for Cyclistic.
