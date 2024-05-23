@@ -178,6 +178,99 @@ write.csv(summary(divvy_data), file_path)
 # Save cleaned data
 write.csv(divvy_data, "cleaned_divvy_data.csv", row.names = FALSE)
 
+
+[conflicted] Removing existing preference.
+[conflicted] Will prefer dplyr::filter over any other package.
+[conflicted] Removing existing preference.
+[conflicted] Will prefer dplyr::lag over any other package.
+2 conflicts
+
+• `filter()`: dplyr
+
+• `lag()`: dplyr
+
+
+
+[1] "Successfully changed working directory."
+
+
+Rows: 365069 Columns: 12
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (4): from_station_name, to_station_name, usertype, gender
+dbl  (5): trip_id, bikeid, from_station_id, to_station_id, birthyear
+num  (1): tripduration
+dttm (2): start_time, end_time
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 426887 Columns: 13
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (5): ride_id, rideable_type, start_station_name, end_station_name, memb...
+dbl  (6): start_station_id, end_station_id, start_lat, start_lng, end_lat, e...
+dttm (2): started_at, ended_at
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+
+
+# A tibble: 6 × 12
+   trip_id start_time          end_time            bikeid tripduration
+     <dbl> <dttm>              <dttm>               <dbl>        <dbl>
+1 21742443 2019-01-01 00:04:37 2019-01-01 00:11:07   2167          390
+2 21742444 2019-01-01 00:08:13 2019-01-01 00:15:34   4386          441
+3 21742445 2019-01-01 00:13:23 2019-01-01 00:27:12   1524          829
+4 21742446 2019-01-01 00:13:45 2019-01-01 00:43:28    252         1783
+5 21742447 2019-01-01 00:14:52 2019-01-01 00:20:56   1170          364
+6 21742448 2019-01-01 00:15:33 2019-01-01 00:19:09   2437          216
+# ℹ 7 more variables: from_station_id <dbl>, from_station_name <chr>,
+#   to_station_id <dbl>, to_station_name <chr>, usertype <chr>, gender <chr>,
+#   birthyear <dbl>
+# A tibble: 6 × 0
+ [1] "trip_id"           "start_time"        "end_time"         
+ [4] "bikeid"            "tripduration"      "from_station_id"  
+ [7] "from_station_name" "to_station_id"     "to_station_name"  
+[10] "usertype"          "gender"            "birthyear"        
+character(0)
+[1] 12
+[1] 0
+# A tibble: 0 × 1
+# ℹ 1 variable: tripduration <dbl>
+tibble [345,357 × 12] (S3: tbl_df/tbl/data.frame)
+ $ trip_id          : num [1:345357] 21742443 21742444 21742445 21742446 21742447 ...
+ $ start_time       : POSIXct[1:345357], format: "2019-01-01 00:04:37" "2019-01-01 00:08:13" ...
+ $ end_time         : POSIXct[1:345357], format: "2019-01-01 00:11:07" "2019-01-01 00:15:34" ...
+ $ bikeid           : num [1:345357] 2167 4386 1524 252 1170 ...
+ $ tripduration     : num [1:345357] 390 441 829 1783 364 ...
+ $ from_station_id  : num [1:345357] 199 44 15 123 173 98 98 211 150 268 ...
+ $ from_station_name: chr [1:345357] "Wabash Ave & Grand Ave" "State St & Randolph St" "Racine Ave & 18th St" "California Ave & Milwaukee Ave" ...
+ $ to_station_id    : num [1:345357] 84 624 644 176 35 49 49 142 148 141 ...
+ $ to_station_name  : chr [1:345357] "Milwaukee Ave & Grand Ave" "Dearborn St & Van Buren St (*)" "Western Ave & Fillmore St (*)" "Clark St & Elm St" ...
+ $ usertype         : chr [1:345357] "Subscriber" "Subscriber" "Subscriber" "Subscriber" ...
+ $ gender           : chr [1:345357] "Male" "Female" "Female" "Male" ...
+ $ birthyear        : num [1:345357] 1989 1990 1994 1993 1994 ...
+ - attr(*, "na.action")= 'omit' Named int [1:446599] 20 22 49 53 54 55 56 59 78 79 ...
+  ..- attr(*, "names")= chr [1:446599] "20" "22" "49" "53" ...
+Rows: 345,357
+Columns: 12
+$ trip_id           <dbl> 21742443, 21742444, 21742445, 21742446, 21742447, 21…
+$ start_time        <dttm> 2019-01-01 00:04:37, 2019-01-01 00:08:13, 2019-01-0…
+$ end_time          <dttm> 2019-01-01 00:11:07, 2019-01-01 00:15:34, 2019-01-0…
+$ bikeid            <dbl> 2167, 4386, 1524, 252, 1170, 2437, 2708, 2796, 6205,…
+$ tripduration      <dbl> 390, 441, 829, 1783, 364, 216, 177, 100, 1727, 336, …
+$ from_station_id   <dbl> 199, 44, 15, 123, 173, 98, 98, 211, 150, 268, 299, 2…
+$ from_station_name <chr> "Wabash Ave & Grand Ave", "State St & Randolph St", …
+$ to_station_id     <dbl> 84, 624, 644, 176, 35, 49, 49, 142, 148, 141, 295, 4…
+$ to_station_name   <chr> "Milwaukee Ave & Grand Ave", "Dearborn St & Van Bure…
+$ usertype          <chr> "Subscriber", "Subscriber", "Subscriber", "Subscribe…
+$ gender            <chr> "Male", "Female", "Female", "Male", "Male", "Female"…
+$ birthyear         <dbl> 1989, 1990, 1994, 1993, 1994, 1983, 1984, 1990, 1995…
+Summary statistics exported successfully.
+Cleaned data saved successfully.
+
+
 ```
 - This script first loads necessary libraries and imports the Divvy trip data from 2019 Q1 and 2020 Q1. Then, it cleans the data by renaming columns, removing unnecessary columns, handling missing values, removing duplicates, converting data types, and visualizing various aspects of the data using ggplot2. Finally, it exports summary statistics and the cleaned data to CSV files.
 
